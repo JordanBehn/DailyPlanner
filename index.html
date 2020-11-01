@@ -29,17 +29,27 @@
         $("#currentDay").text(mom)
             //loop through, create row for each hour of work day
         for (i = 0; i < 12; i++) {
-            let time = i + 8
+            let time = i + 8;
+            //create row
             let hourRow = $("<hour-row>").addClass("row");
-            let hourcol = $("<hour-col>").addClass("col-2").text(time + ":00")
-
+            //create hour, text area, and save button for each row
+            let hourcol = $("<hour-col>").addClass("col-2 hour time-block").text(time + ":00");
+            let textcol = $("<textarea>").addClass("col-8 description");
+            let savecol = $("<button>").addClass("col-2 saveBtn").text("Save");
+            //if statement to assign color based on whether the time is in the past present or future
+            if (time > moment().hour()) {
+                textcol.addClass("future")
+            } else if (time < moment().hour()) {
+                textcol.addClass("past")
+            } else {
+                textcol.addClass("present")
+            }
             hourRow.append(hourcol);
+            hourRow.append(textcol);
+            hourRow.append(savecol);
+            //add row to container
+
             $(".container").append(hourRow)
-
-            // let txtarea = $("<textarea>")
-            //     //let newColBtn = newCol2
-
-
         }
         console.log(moment().hour())
     </script>
