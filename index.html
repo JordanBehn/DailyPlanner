@@ -27,14 +27,21 @@
     <script>
         var mom = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         $("#currentDay").text(mom)
+            //loop through, create row for each hour of work day
         for (i = 0; i < 12; i++) {
-            let newRow = $("<row>")
-            let newCol2 = $("<col2>")
-            let newCol8 = $("<col8>")
-            let newColBtn = newCol2
+            let time = i + 8
+            let hourRow = $("<hour-row>").addClass("row");
+            let hourcol = $("<hour-col>").addClass("col-2").text(time + ":00")
+
+            hourRow.append(hourcol);
+            $(".container").append(hourRow)
+
+            // let txtarea = $("<textarea>")
+            //     //let newColBtn = newCol2
 
 
         }
+        console.log(moment().hour())
     </script>
 </body>
 
