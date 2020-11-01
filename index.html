@@ -32,7 +32,8 @@
             let time = i + 8;
             //create row
             let hourRow = $("<hour-row>").addClass("row");
-            //create hour, text area, and save button for each row
+            hourRow.attr("time", time)
+                //create hour, text area, and save button for each row
             let hourcol = $("<hour-col>").addClass("col-2 hour time-block").text(time + ":00");
             let textcol = $("<textarea>").addClass("col-8 description");
             let savecol = $("<button>").addClass("col-2 saveBtn").text("Save");
@@ -44,14 +45,25 @@
             } else {
                 textcol.addClass("present")
             }
+            //fill textarea from local storage, if it's there
+            var savedVal = window.localStorage.getItem("input-text-row" + time);
+            textcol.text(savedVal)
+
             hourRow.append(hourcol);
             hourRow.append(textcol);
             hourRow.append(savecol);
-            //add row to container
 
+
+            //add row to container
             $(".container").append(hourRow)
         }
-        console.log(moment().hour())
+
+
+        $("button").click(function() {
+            window.localStorage.setItem("input-text-row" + $(this).parent().attr("time"), $(this).parent().children("textarea").val());
+            console.log($(this).parent().children(".description").val());
+            console.log($(this).parent().attr("time"))
+        });
     </script>
 </body>
 
